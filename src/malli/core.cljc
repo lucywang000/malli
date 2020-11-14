@@ -457,7 +457,7 @@
                                                         true (keys m)))]))
                    validate (fn [m]
                               (boolean
-                                #?(:clj  (let [it (.iterator ^Iterable validators)]
+                                #?(:clj  (let [it (.iterator validators)]
                                            (boolean
                                              (loop []
                                                (if (.hasNext it)
@@ -1293,6 +1293,6 @@
   (merge (predicate-schemas) (class-schemas) (comparator-schemas) (type-schemas) (base-schemas)))
 
 (def default-registry
-  (mr/registry (cond (identical? mr/type "default") (default-schemas)
-                     (identical? mr/type "custom") (mr/custom-default-registry)
+  (mr/registry (cond (= mr/type "default") (default-schemas)
+                     (= mr/type "custom") (mr/custom-default-registry)
                      :else (-fail! ::invalid-registry.type {:type mr/type}))))

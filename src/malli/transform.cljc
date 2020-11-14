@@ -149,7 +149,7 @@
          (.withZone (ZoneId/of "UTC")))))
 
 (defn -date->string [x]
-  (if (inst? x)
+  #_(if (inst? x)
     (try
       #?(:clj  (.format +date->string-format+ (Instant/ofEpochMilli (inst-ms x)))
          :cljs (.toISOString x))
